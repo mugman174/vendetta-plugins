@@ -1,0 +1,14 @@
+{
+    "name": "Aliucord",
+    "description": "Aliucord loader.",
+    "authors": [
+        {
+            "name": "mugman",
+            "id": "601836455006044163"
+        }
+    ],
+    "main": "src/index.js",
+    "vendetta": {
+        "icon": "ic_badge_staff"
+    }
+}
