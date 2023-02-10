@@ -1,4 +1,4 @@
-import sysinfo from "./sysinfo";
+import sysinfo from "./cmd";
 import { registerCommand } from "@vendetta/commands";
 
 let syscmd;
