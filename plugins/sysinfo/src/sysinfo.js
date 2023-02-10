@@ -1,6 +1,12 @@
 import { React, ReactNative } from "@vendetta/metro/common";
 import { version } from "@vendetta";
-import { deviceinfo, hwinfo, softinfo, discordinfo } from "./components";
+import {
+  deviceinfo,
+  hwinfo,
+  softinfo,
+  discordinfo,
+  reactinfo,
+} from "./components";
 
 function genDebug() {
   try {
@@ -19,8 +25,8 @@ function genDebug() {
     } = deviceinfo();
     const { osName, osVersion } = softinfo();
 
-    const Hermes = HermesInternal.getRuntimeProperties();
-    const { reactNativeVersion } = ReactNative.Platform.constants;
+    const { ReactVersion, RNVersion, HermesBytecode, HermesRelease } =
+      reactinfo();
 
     let output = {
       Device: {
@@ -46,12 +52,10 @@ function genDebug() {
         Vendetta: version,
       },
       React: {
-        Version: React.version,
-        "Hermes Bytecode": Hermes["Bytecode Version"],
-        Hermes: Hermes["OSS Release Version"],
-        Native: `${reactNativeVersion.major ?? 0}.${
-          reactNativeVersion.minor ?? 0
-        }.${reactNativeVersion.patch ?? 0}`,
+        Version: ReactVersion,
+        "Hermes Bytecode": HermesBytecode,
+        Hermes: HermesRelease,
+        Native: RNVersion,
       },
     };
     if (window.enmity) {
