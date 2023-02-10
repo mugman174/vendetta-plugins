@@ -2,7 +2,6 @@ import { findByProps } from "@vendetta/metro";
 import { React, ReactNative } from "@vendetta/metro/common";
 import { version } from "@vendetta";
 
-
 function genDebug() {
   try {
     const { cpuCoreCount, cpuPercentage, memory } = findByProps("memory");
@@ -12,8 +11,10 @@ function genDebug() {
     const { Version, Build, ReleaseChannel } =
       ReactNative.NativeModules.InfoDictionaryManager;
 
-    const { osVersion, systemName } = ReactNative.Platform.constants;
-
+    const { OS: osName } = ReactNative.Platform;
+    const osVersion =
+      ReactNative.Platform.constants.osVersion ||
+      ReactNative.Platform.constants.Release;
     const {
       device,
       deviceManufacturer,
@@ -22,9 +23,12 @@ function genDebug() {
       systemVersion,
     } = ReactNative.NativeModules.DCDDeviceManager;
     const { height, width } =
-      ReactNative.DeviceInfo.getConstants().Dimensions.screen;
-    const Hermes = HermesInternal.getRuntimeProperties()
+      ReactNative.DeviceInfo.getConstants().Dimensions.screen ||
+      ReactNative.DeviceInfo.getConstants().Dimensions.screenPhysicalPixels;
+
+    const Hermes = HermesInternal.getRuntimeProperties();
     const { reactNativeVersion } = ReactNative.Platform.constants;
+
     let output = {
       Device: {
         Device: device,
@@ -39,7 +43,7 @@ function genDebug() {
         "Memory Usage": memUsage,
       },
       Software: {
-        OS: systemName,
+        OS: osName,
         Version: osVersion,
       },
       Discord: {
@@ -60,6 +64,7 @@ function genDebug() {
     if (window.enmity) {
       output.Discord.Enmity = window.enmity.version;
     }
+    // Aliucord detection does not work
     return output;
   } catch (e) {
     alert(e);
