@@ -61,7 +61,9 @@ function genDebug() {
     if (window.enmity) {
       output.Discord.Enmity = window.enmity.version;
     }
-    // Aliucord detection does not work
+    if (window.aliucord) {
+      output.Discord.Aliucord = window.aliucord.version;
+    }
     return output;
   } catch (e) {
     alert(e);
