@@ -9,7 +9,6 @@ import {
 } from "./components";
 
 function genDebug() {
-  try {
     const { cpuCoreCount, cpuPerc, memUsage, netInfo } = hwinfo();
 
     const { Version, Build, ReleaseChannel } = discordinfo();
@@ -66,12 +65,6 @@ function genDebug() {
       output.Discord.Aliucord = window.aliucord.version;
     }
     return output;
-  } catch (e) {
-    alert(e);
-    console.log(e);
-    console.log(e.trace);
-    throw e;
-  }
 }
 
 export default genDebug;
