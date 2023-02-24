@@ -4,13 +4,11 @@ function hwinfo() {
   const { cpuCoreCount, cpuPercentage, memory } = findByProps("memory");
   const cpuPerc = cpuPercentage.toFixed(2) + "%";
   const memUsage = parseFloat((memory / 1000).toPrecision(3)) + " MB";
-  const { netType: type, netDetails: details } =
-    findByProps("useNetInfo").fetch()._55;
+  const { type, details } =  findByProps("useNetInfo").fetch()._55;
   let netInfo = type;
-  if (netType == "cellular") {
-    netInfo += ` ${netDetails.cellularGeneration}`;
+  if (type == "cellular") {
+    netInfo += ` ${details.cellularGeneration}`;
   }
-  alert(netType);
   return { cpuCoreCount, cpuPerc, memUsage, netInfo };
 }
 
