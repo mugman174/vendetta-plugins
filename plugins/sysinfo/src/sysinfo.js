@@ -9,62 +9,62 @@ import {
 } from "./components";
 
 function genDebug() {
-    const { cpuCoreCount, cpuPerc, memUsage, netInfo } = hwinfo();
+  const { cpuCoreCount, cpuPerc, memUsage, netInfo } = hwinfo();
 
-    const { Version, Build, ReleaseChannel } = discordinfo();
+  const { Version, Build, ReleaseChannel } = discordinfo();
 
-    const {
-      device,
-      deviceManufacturer,
-      deviceBrand,
-      deviceModel,
-      systemVersion,
-      width,
-      height,
-    } = deviceinfo();
-    const { osName, osVersion } = softinfo();
+  const {
+    device,
+    deviceManufacturer,
+    deviceBrand,
+    deviceModel,
+    systemVersion,
+    width,
+    height,
+  } = deviceinfo();
+  const { osName, osVersion } = softinfo();
 
-    const { ReactVersion, RNVersion, HermesBytecode, HermesRelease } =
-      reactinfo();
+  const { ReactVersion, RNVersion, HermesBytecode, HermesRelease } =
+    reactinfo();
 
-    let output = {
-      Device: {
-        Device: device,
-        Model: deviceModel,
-        Manufacturer: deviceManufacturer,
-        Brand: deviceBrand,
-        Display: width + "x" + height,
-      },
-      Hardware: {
-        "CPU Usage": cpuPerc,
-        "CPU Cores": cpuCoreCount,
-        "Memory Usage": memUsage,
-        Network: netInfo,
-      },
-      Software: {
-        OS: osName,
-        Version: osVersion,
-      },
-      Discord: {
-        Branch: ReleaseChannel,
-        Version: Version,
-        Build: Build,
-        Vendetta: version,
-      },
-      React: {
-        Version: ReactVersion,
-        "Hermes Bytecode": HermesBytecode,
-        Hermes: HermesRelease,
-        Native: RNVersion,
-      },
-    };
-    if (window.enmity) {
-      output.Discord.Enmity = window.enmity.version;
-    }
-    if (window.aliucord) {
-      output.Discord.Aliucord = window.aliucord.version;
-    }
-    return output;
+  let output = {
+    Device: {
+      Device: device,
+      Model: deviceModel,
+      Manufacturer: deviceManufacturer,
+      Brand: deviceBrand,
+      Display: width + "x" + height,
+    },
+    Hardware: {
+      "CPU Usage": cpuPerc,
+      "CPU Cores": cpuCoreCount,
+      "Memory Usage": memUsage,
+      Network: netInfo,
+    },
+    Software: {
+      OS: osName,
+      Version: osVersion,
+    },
+    Discord: {
+      Branch: ReleaseChannel,
+      Version: Version,
+      Build: Build,
+      Vendetta: version,
+    },
+    React: {
+      Version: ReactVersion,
+      "Hermes Bytecode": HermesBytecode,
+      Hermes: HermesRelease,
+      Native: RNVersion,
+    },
+  };
+  if (window.enmity) {
+    output.Discord.Enmity = window.enmity.version;
+  }
+  if (window.aliucord) {
+    output.Discord.Aliucord = window.aliucord.version;
+  }
+  return output;
 }
 
 export default genDebug;
