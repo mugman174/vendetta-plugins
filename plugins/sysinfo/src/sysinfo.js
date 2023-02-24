@@ -10,7 +10,7 @@ import {
 
 function genDebug() {
   try {
-    const { cpuCoreCount, cpuPerc, memUsage } = hwinfo();
+    const { cpuCoreCount, cpuPerc, memUsage, netInfo } = hwinfo();
 
     const { Version, Build, ReleaseChannel } = discordinfo();
 
@@ -40,6 +40,7 @@ function genDebug() {
         "CPU Usage": cpuPerc,
         "CPU Cores": cpuCoreCount,
         "Memory Usage": memUsage,
+        Network: netInfo,
       },
       Software: {
         OS: osName,
