@@ -1,7 +1,6 @@
 import genDebug from "./sysinfo";
 
 function sysinfocmd(args, ctx) {
-  try {
     let output = ["__System Information__\n"];
     const data = genDebug();
     Object.keys(data).forEach((option) => {
@@ -11,11 +10,6 @@ function sysinfocmd(args, ctx) {
       });
     });
     return { content: output.join("\n") };
-  } catch (e) {
-    alert(e);
-    console.log(e.trace);
-    throw e;
-  }
 }
 
 export default sysinfocmd;
