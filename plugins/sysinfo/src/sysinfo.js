@@ -36,9 +36,7 @@ function genDebug() {
       Display: width + "x" + height,
     },
     Hardware: {
-      "CPU Usage": cpuPerc,
       "CPU Cores": cpuCoreCount,
-      "Memory Usage": memUsage,
       Network: netInfo,
     },
     Software: {
@@ -50,6 +48,8 @@ function genDebug() {
       Version: Version,
       Build: Build,
       Vendetta: version,
+      "CPU Usage": cpuPerc,
+      "Memory Usage": memUsage,
     },
     React: {
       Version: ReactVersion,
