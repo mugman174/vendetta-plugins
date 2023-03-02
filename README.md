@@ -1,3 +1,3 @@
 # Vendetta Plugins
 
-Urban Dictionary
+Urban Dictionary and Sysinfo
