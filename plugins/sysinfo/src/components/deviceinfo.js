@@ -8,9 +8,9 @@ function deviceInfo() {
     deviceModel,
     systemVersion,
   } = ReactNative.NativeModules.DCDDeviceManager;
-  const { height, width } =
-    ReactNative.DeviceInfo.getConstants().Dimensions.screen ||
-    ReactNative.DeviceInfo.getConstants().Dimensions.screenPhysicalPixels;
+  let { height, width, scale } = ReactNative.Dimensions.get("screen");
+  height *= scale;
+  width *= scale;
   return {
     device,
     deviceManufacturer,
