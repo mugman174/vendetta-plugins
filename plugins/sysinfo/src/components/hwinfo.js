@@ -19,7 +19,6 @@ function hwinfo() {
     };
     netInfo = networkMap[type] ?? type;
   }
-  throw "Test Error";
   return { cpuCoreCount, cpuPerc, memUsage, netInfo };
 }
 
