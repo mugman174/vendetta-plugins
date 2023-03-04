@@ -7,7 +7,7 @@ function hwinfo() {
   const { type, details } = findByProps("useNetInfo").fetch()._55;
   let netInfo = "";
   if (type == "cellular") {
-    netInfo = `Cellular ${details.cellularGeneration.toUpperCase()}`;
+    netInfo = `Cellular ${details.cellularGeneration?.toUpperCase() || ""}`;
   } else {
     const networkMap = {
       wifi: "WiFi",
@@ -19,6 +19,7 @@ function hwinfo() {
     };
     netInfo = networkMap[type] ?? type;
   }
+  throw "Test Error";
   return { cpuCoreCount, cpuPerc, memUsage, netInfo };
 }
 
