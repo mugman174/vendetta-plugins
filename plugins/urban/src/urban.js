@@ -1,20 +1,24 @@
-async function UrbanDef(args, ctx) {
-  //try{
-  const word = args.find((arg) => arg.name == "word").value;
-  const query = encodeURIComponent(word);
-  const url = `https://api.urbandictionary.com/v0/define?term=${query}`;
-  const res = await (await fetch(url)).json();
-  let out = `No definition found for ${word}`;
-  let perma = "";
-  if (res.list && res.list[0]) {
-    let rlo = res.list[0];
-    out = rlo.definition;
-    perma = `Source: <${rlo.permalink}>`;
+async function urbanDef(args, ctx) {
+  try {
+    const word = args.find(arg => arg.name === "word")?.value?.trim();
+    if (!word) {
+      return { content: "Please provide a word to define." };
+    }
+    const query = encodeURIComponent(word);
+    const url = `https://api.urbandictionary.com/v0/define?term=${query}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    const definition = data.list?.[0]?.definition;
+    if (!definition) {
+      return { content: `No definition found for "${word}".` };
+    }
+    const permalink = data.list[0].permalink;
+    const output = `__Definition for \`${word}\`__\n\n${definition}\n\nSource: <${permalink}>`;
+    return { content: output };
+  } catch (error) {
+    console.error(error);
+    return { content: "An error occurred while fetching the definition." };
   }
-  return {
-    content: `__Definition for \`${word}\`__\n\n${out}\n\n${perma}`,
-  };
-  //}catch(e){alert(e);console.log(e);throw(e)}
 }
 
-export default UrbanDef;
+export default urbanDef;
