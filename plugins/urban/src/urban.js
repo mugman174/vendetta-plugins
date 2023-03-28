@@ -1,6 +1,6 @@
 async function urbanDef(args, ctx) {
   try {
-    const word = args.find(arg => arg.name === "word")?.value?.trim();
+    const word = args.find((arg) => arg.name === "word")?.value?.trim();
     if (!word) {
       return { content: "Please provide a word to define." };
     }
