@@ -1,6 +1,6 @@
 {
   "name": "System Info",
-  "description": "Get random information about your device.",
+  "description": "Get system information about your device using /sysinfo.",
   "authors": [
     {
       "name": "mugman",
@@ -9,6 +9,6 @@
   ],
   "main": "src/index.js",
   "vendetta": {
-    "icon": "ic_badge_staff"
+    "icon": "debug"
   }
 }
