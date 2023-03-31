@@ -1,37 +1,33 @@
-import { React, ReactNative } from "@vendetta/metro/common";
-import { version } from "@vendetta";
-import { showConfirmationAlert } from "@vendetta/ui/alerts";
-import {
-  deviceinfo,
-  hwinfo,
-  softinfo,
-  discordinfo,
-  reactinfo,
-} from "./components";
+import { getDebugInfo } from "@vendetta/debug";
+
+import { deviceinfo, hwinfo, discordinfo } from "./components";
 
 function genDebug() {
   try {
     const { cpuCoreCount, cpuPerc, memUsage, netInfo } = hwinfo();
 
-    const { Version, Build, ReleaseChannel } = discordinfo();
-
+    const { ReleaseChannel: discordBranch } = discordinfo();
+    const { vendetta, discord, react, hermes, os, device } = getDebugInfo();
+    const { version: HermesRelease, bytecodeVersion: HermesBytecode } = hermes;
+    const { version: ReactVersion, nativeVersion: RNVersion } = react;
+    const { name: osName, version: osVersion, sdk: osSdk } = os;
     const {
-      device,
-      deviceManufacturer,
-      deviceBrand,
-      deviceModel,
-      systemVersion,
-      width,
-      height,
-    } = deviceinfo();
-    const { osName, osVersion } = softinfo();
+      manufacturer: deviceManufacturer,
+      brand: deviceBrand,
+      model: deviceModel,
+      codename: deviceCodename,
+    } = device;
+    const { version: vendettaVersion } = vendetta;
+    const { version: discordVersion, build: discordBuild } = discord;
 
-    const { ReactVersion, RNVersion, HermesBytecode, HermesRelease } =
-      reactinfo();
+    const deviceName =
+      osName == "iOS" ? deviceCodename : `${deviceBrand} ${deviceModel}`;
+
+    const { width, height } = deviceinfo();
 
     let output = {
       Device: {
-        Device: device,
+        Device: deviceName,
         Model: deviceModel,
         Manufacturer: deviceManufacturer,
         Brand: deviceBrand,
@@ -46,10 +42,10 @@ function genDebug() {
         Version: osVersion,
       },
       Discord: {
-        Branch: ReleaseChannel,
-        Version: Version,
-        Build: Build,
-        Vendetta: version,
+        Branch: discordBranch,
+        Version: discordVersion,
+        Build: discordBuild,
+        Vendetta: vendettaVersion,
         "CPU Usage": cpuPerc,
         "Memory Usage": memUsage,
       },
@@ -66,9 +62,12 @@ function genDebug() {
     if (window.aliucord) {
       output.Discord.Aliucord = window.aliucord.version;
     }
+    if (osSdk) {
+      output.Discord.Software["SDK Version"] = osSdk;
+    }
     return output;
   } catch (e) {
-    showConfirmationAlert({ title: "Error | Send to mugman#0043", content: e });
+    alert(e);
     console.trace(e);
     throw e;
   }
