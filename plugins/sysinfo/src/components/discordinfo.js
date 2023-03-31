@@ -1,6 +1,6 @@
-import { InfoDictionaryManager } from "@vendetta/metro/common/ReactNative/NativeModules";
+import { NativeModules } from "@vendetta/metro/common/ReactNative";
 
 function discordinfo() {
-  return InfoDictionaryManager;
+  return NativeModules.InfoDictionaryManager ?? NativeModules.RTNClientInfoManager;
 }
 export default discordinfo;
