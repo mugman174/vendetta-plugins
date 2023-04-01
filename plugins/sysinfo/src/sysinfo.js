@@ -63,7 +63,7 @@ function genDebug() {
       output.Discord.Aliucord = window.aliucord.version;
     }
     if (osSdk) {
-      output.Discord.Software["SDK Version"] = osSdk;
+      output.Software["SDK Version"] = osSdk;
     }
     return output;
   } catch (e) {
