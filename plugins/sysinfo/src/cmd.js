@@ -18,6 +18,7 @@ function sysinfocmd(args, ctx) {
         });
       }
     });
+    if args.find((i) => i.name == option.toLowerCase());
     return { content: output.join("\n") };
   } catch (e) {
     alert(e);

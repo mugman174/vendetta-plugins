@@ -7,14 +7,17 @@ let syscmd;
 export default {
   onLoad: () => {
     const categories = ["device", "hardware", "software", "discord", "react"]; // TODO: move this into storage or somewhere more global
-    syscmd = registerCommand({
-      name: "sysinfo",
-      displayName: "sysinfo",
+    let options = [
+      {
+        name: "ephemeral",
+        displayName: "ephemeral",
+        description: "Keep sysinfo ephemeral",
+        displayDescription: "Keep sysinfo ephemeral",
 
-      description: "system info",
-      displayDescription: "system info",
-
-      options: categories.map((cat) => {
+        type: 5,
+        required: false,
+      },
+      ...categories.map((cat) => {
         return {
           name: cat,
           displayName: cat,
@@ -26,6 +29,15 @@ export default {
           required: false,
         };
       }),
+    ];
+    syscmd = registerCommand({
+      name: "sysinfo",
+      displayName: "sysinfo",
+
+      description: "system info",
+      displayDescription: "system info",
+
+      options,
       execute: sysinfo,
       applicationId: -1,
       inputType: 1,
