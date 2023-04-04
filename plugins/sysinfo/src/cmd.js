@@ -19,7 +19,7 @@ function sysinfocmd(args, ctx) {
         });
       }
     });
-    ephemeral = args.find((i) => i.name == "ephemeral")?.value;
+    const ephemeral = args.find((i) => i.name == "ephemeral")?.value;
     if (ephemeral === true || ephemeral === undefined) {
       // Make ephemerality configurable?
       findByProps("sendBotMessage").sendBotMessage(
