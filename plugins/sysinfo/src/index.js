@@ -11,8 +11,8 @@ export default {
       {
         name: "ephemeral",
         displayName: "ephemeral",
-        description: "Keep sysinfo ephemeral",
-        displayDescription: "Keep sysinfo ephemeral",
+        description: "Keep sysinfo ephemeral (default: true)",
+        displayDescription: "Keep sysinfo ephemeral (default: true)",
 
         type: 5,
         required: false,

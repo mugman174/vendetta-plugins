@@ -1,6 +1,7 @@
 import genDebug from "./sysinfo";
 import { useProxy } from "@vendetta/storage";
 import { storage } from "@vendetta/plugin";
+import { findByProps } from "@vendetta/metro";
 
 function sysinfocmd(args, ctx) {
   try {
@@ -18,8 +19,16 @@ function sysinfocmd(args, ctx) {
         });
       }
     });
-    if args.find((i) => i.name == option.toLowerCase());
-    return { content: output.join("\n") };
+    ephemeral = args.find((i) => i.name == "ephemeral")?.value;
+    if (ephemeral === true || ephemeral === undefined) {
+      // Make ephemerality configurable?
+      findByProps("sendBotMessage").sendBotMessage(
+        ctx.channel.id,
+        output.join("\n")
+      );
+    } else {
+      return { content: output.join("\n") };
+    }
   } catch (e) {
     alert(e);
     console.error(e);
