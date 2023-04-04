@@ -8,6 +8,7 @@ const { FormRow, FormSection, FormSwitch } = Forms;
 export default () => {
   useProxy(storage);
   const categories = ["device", "hardware", "software", "discord", "react"]; // TODO: move this into storage or somewhere more global
+  for (const cat of categories) storage[cat] ??= true;
   return (
     <RN.ScrollView style={{ flex: 1 }}>
       <FormSection title="Options" titleStyleType="no_border">
