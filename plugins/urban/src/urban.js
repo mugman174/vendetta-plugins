@@ -1,6 +1,7 @@
+import { findByProps } from "@vendetta/metro"
+
 export default async function urbanDef(args, ctx) {
   try {
-    const { findByProps } = vendetta.metro
     const { sendBotMessage } = findByProps("sendBotMessage");
     
     const word = args.find((arg) => arg.name === "word")?.value?.trim();
