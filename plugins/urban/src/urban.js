@@ -1,11 +1,14 @@
+import { findByProps } from "@vendetta/metro"
+
 export default async function urbanDef(args, ctx) {
   try {
+    const { sendBotMessage } = findByProps("sendBotMessage");
+    
     const word = args.find((arg) => arg.name === "word")?.value?.trim();
     if (!word) {
       sendBotMessage(ctx.channel.id, `Please provide a word to search the definition for.`);
       return;
     }
-    const { sendBotMessage } = findByProps("sendBotMessage");
     const query = encodeURIComponent(word);
     const url = `https://api.urbandictionary.com/v0/define?term=${query}`;
     const response = await fetch(url);
