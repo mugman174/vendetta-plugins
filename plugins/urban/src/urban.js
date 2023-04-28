@@ -8,7 +8,7 @@ export default async function urbanDef(args, ctx) {
 		const word = options.get("word").value.trim();
 		const query = encodeURIComponent(word);
 		const url = `https://api.urbandictionary.com/v0/define?term=${query}`;
-		const data = await fetch(url).then(res=>res.json);
+		const data = await fetch(url).then(res=>res.json());
 
 		const inline_links = options.get("inline_links")?.value || false;
 		const defObj = data.list?.[0];
