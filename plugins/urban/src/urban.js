@@ -20,11 +20,11 @@ export default async function urbanDef(args, ctx) {
 		let output = `__Definition for \`${defObj.word}\`__`;
 		
 		if (!inline_links) {
-			output += `\n> ${quote(definition)}\n\n`+
+			output += `\n${quote(definition)}\n\n`+
 								`Source: <${permalink}>`;
 		} else {
 			output += ` ([source](${permalink} "Link to the place where the definition was found"))\n`+
-				`> ${quote(replaceHighlighted(definition))}`
+				`${quote(replaceHighlighted(definition))}`
 			
 		}
 
@@ -44,7 +44,7 @@ export default async function urbanDef(args, ctx) {
 	}
 }
 function quote(text) {
-	return `> ${text.replaceAll("\n", "\n>")}`
+	return `> ${text.replaceAll("\n", "\n> ")}`
 }
 function replaceHighlighted(text) {
 	return text.replace(
