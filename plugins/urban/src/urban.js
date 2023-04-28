@@ -21,10 +21,10 @@ export default async function urbanDef(args, ctx) {
 		let output = `__Definition for **\`${defObj.word}\`**__`;
 		
 		if (!inline_links) {
-			output += `\n${quote(definition)}\n\n`+
+			output += `\n${quote(definition)}\n\n` +
 			`Source: <${permalink}>`;
 		} else {
-			output += ` ([source](${permalink} "Link to the place where the definition was found"))\n`+
+			output += ` ([source](${permalink} "Link to the place where the definition was found"))\n` +
 			`${quote(replaceHighlighted(definition))}`;
 		}
 
@@ -38,7 +38,7 @@ export default async function urbanDef(args, ctx) {
 		console.error(error);
 		sendBotMessage(
 			ctx.channel.id,
-			`\`\`\`js\n${error.stack}\`\`\``+
+			`\`\`\`js\n${error.stack}\`\`\`` +
 			"An error occurred while processing the command\n" +
 			"Send the error in ${FORUM_POST_URL}, to get this issue solved (hopefully)"
 		);
