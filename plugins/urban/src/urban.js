@@ -1,8 +1,20 @@
 import { findByProps } from "@vendetta/metro";
 const { sendBotMessage } = findByProps("sendBotMessage");
-const FORUM_POST_URL = "https://discord.com/channels/1015931589865246730/1092643779523121262";
+const FORUM_POST_URL =
+	"https://discord.com/channels/1015931589865246730/1092643779523121262";
 export default async function urbanDef(args, ctx) {
 	try {
+		function quote(text) {
+			return `> ${text.replaceAll("\n", "\n> ")}`;
+		}
+		function replaceHighlighted(text) {
+			return text.replace(/\[(.*?)\]/g, (match, word) => {
+				word = word.trim();
+				return `[${word}](<https://www.urbandictionary.com/define.php?term=${encodeURIComponent(
+					word
+				)}> "Definition for “${word}”")`;
+			});
+		}
 		const options = new Map(args.map((option) => [option.name, option]));
 
 		const word = options.get("word").value.trim();
@@ -15,19 +27,23 @@ export default async function urbanDef(args, ctx) {
 		const defObj = data.list?.[0];
 		const definition = defObj?.definition;
 		if (!definition) {
-			return sendBotMessage(ctx.channel.id, `No definition found for \`${word.replaceAll("`", "`󠄴")}\`${response.status !== 200 ? ` (${response.status})` : ""}`);
+			return sendBotMessage(
+				ctx.channel.id,
+				`No definition found for \`${word.replaceAll("`", "`󠄴")}\`${
+					response.status !== 200 ? ` (${response.status})` : ""
+				}`
+			);
 		}
 		const permalink = defObj.permalink;
 		let output = `__Definition for **\`${defObj.word}\`**__`;
-		
-		if (!inline_links) {
-			output += `\n${quote(definition)}\n\n` +
-			`Source: <${permalink}>`;
-		} else {
-			output += ` ([source](${permalink} "Link to the place where the definition was found"))\n` +
-			`${quote(replaceHighlighted(definition))}`;
-		}
 
+		if (!inline_links) {
+			output += `\n${quote(definition)}\n\n` + `Source: <${permalink}>`;
+		} else {
+			output +=
+				` ([source](${permalink} "Link to the place where the definition was found"))\n` +
+				`${quote(replaceHighlighted(definition))}`;
+		}
 
 		if (options.get("ephemeral")?.value === false) {
 			return { content: output };
@@ -35,24 +51,13 @@ export default async function urbanDef(args, ctx) {
 			sendBotMessage(ctx.channel.id, output);
 		}
 	} catch (error) {
+		alert(error.stack);
 		console.error(error);
 		sendBotMessage(
 			ctx.channel.id,
 			`\`\`\`js\n${error.stack}\`\`\`` +
-			"An error occurred while processing the command\n" +
-			"Send the error in ${FORUM_POST_URL}, to get this issue solved (hopefully)"
+				"An error occurred while processing the command\n" +
+				"Send the error in ${FORUM_POST_URL}, to get this issue solved (hopefully)"
 		);
 	}
-}
-function quote(text) {
-	return `> ${text.replaceAll("\n", "\n> ")}`;
-}
-function replaceHighlighted(text) {
-	return text.replace(
-		/\[(.*?)\]/g,
-		(match, word) => {
-			word = word.trim();
-			return `[${word}](<https://www.urbandictionary.com/define.php?term=${encodeURIComponent(word)}> "Definition for “${word}”")`
-		}
-	);
 }
