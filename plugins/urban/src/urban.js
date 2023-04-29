@@ -56,8 +56,8 @@ export default async function urbanDef(args, ctx) {
 		sendBotMessage(
 			ctx.channel.id,
 			`\`\`\`js\n${error.stack}\`\`\`` +
-				"An error occurred while processing the command\n" +
-				"Send the error in ${FORUM_POST_URL}, to get this issue solved (hopefully)"
+				"An error has occurred while processing the </urban:0> command\n" +
+				`Send the error in ${FORUM_POST_URL}, to get this issue solved (hopefully)`
 		);
 	}
 }
