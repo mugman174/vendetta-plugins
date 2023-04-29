@@ -23,18 +23,21 @@ export default {
           name: "ephemeral",
           displayName: "ephemeral",
           description: "Make outputs only be seen by you (default: true)",
-          displayDescription: "Make outputs only be seen by you (default: true)",
+          displayDescription:
+            "Make outputs only be seen by you (default: true)",
           type: 5,
           required: false,
-      },
-      {
+        },
+        {
           name: "inline_links",
           displayName: "inline_links",
-          description: "Makes the [highlighted] words pressable (default: false)",
-          displayDescription: "Makes the [highlighted] words pressable (default: false)",
+          description:
+            "Makes the [highlighted] words pressable (default: false)",
+          displayDescription:
+            "Makes the [highlighted] words pressable (default: false)",
           type: 5,
           required: false,
-      },
+        },
       ],
       execute: UrbanDef,
       applicationId: -1,
