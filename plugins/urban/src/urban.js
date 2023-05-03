@@ -8,7 +8,7 @@ function replaceHighlighted(text) {
 
   return text.replace(/\[(.*?)\]/g, (match, word) => {
     word = word.trim();
-    return `[${word}](<${encodeURIComponent(term_url + word)}>)`;
+    return `[${word}](<${term_url + encodeURIComponent(word)}>)`;
   });
 }
 
