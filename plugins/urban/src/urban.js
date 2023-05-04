@@ -3,6 +3,13 @@ const { sendBotMessage } = findByProps("sendBotMessage");
 const FORUM_POST_URL =
   "https://discord.com/channels/1015931589865246730/1092643779523121262";
 
+function unBracket(text) {
+  return text.replace(/\[(.*?)\]/g, (match, word) => {
+    word = word.trim();
+    return word;
+  });
+}
+
 function replaceHighlighted(text) {
   const term_url = "https://www.urbandictionary.com/define.php?term=";
 
@@ -42,7 +49,7 @@ export default async function urbanDef(args, ctx) {
     let output = `__Definition for **\`${defObj.word}\`**__`;
 
     if (!inline_links) {
-      output += `\n${quote(definition)}\n\n` + `Source: <${permalink}>`;
+      output += `\n${quote(unBracket(definition))}\n\n` + `Source: <${permalink}>`;
     } else {
       output +=
         ` ([source](${permalink}))\n` +
