@@ -19,8 +19,11 @@ function sysinfocmd(args, ctx) {
         });
       }
     });
-    const ephemeral = args.find((i) => i.name == "ephemeral")?.value;
-    if (ephemeral === true || ephemeral === undefined) {
+
+    const epermit = storage["ephemeral"];
+    const ephemeral = args.find((i) => i.name == "ephemeral")?.value ?? epermit;
+    if ((ephemeral || epermit) && !(epermit && !ephemeral)) {
+      //if (ephemeral === true || ephemeral === undefined) {
       // Make ephemerality configurable?
       findByProps("sendBotMessage").sendBotMessage(
         ctx.channel.id,
