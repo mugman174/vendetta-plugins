@@ -1,1 +1,1 @@
-{"name":"System Info","description":"Get system information about your device using /sysinfo.","authors":[{"name":"mugman","id":"601836455006044163"}],"main":"index.js","vendetta":{"icon":"debug"},"hash":"5e8dae31d591df60b9d200a6f99afd32f5b34cd2e56b421210edcd34073ea676"}
+{"name":"System Info","description":"Get system information about your device using /sysinfo.","authors":[{"name":"mugman","id":"601836455006044163"}],"main":"index.js","vendetta":{"icon":"debug"},"hash":"87b9fbd3b39ba38fb7619c7f6627d5d831ff953c8e3c31a248c8c42836da4d7f"}
