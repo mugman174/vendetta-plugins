@@ -5,7 +5,14 @@ import { Forms } from "@vendetta/ui/components";
 
 const { FormRow, FormSection, FormSwitch } = Forms;
 
-const categories = ["device", "hardware", "software", "discord", "react", "ephemeral"]; // TODO: move this into storage or somewhere more global
+const categories = [
+  "device",
+  "hardware",
+  "software",
+  "discord",
+  "react",
+  "ephemeral",
+]; // TODO: move this into storage or somewhere more global
 for (const cat of categories) storage[cat] ??= true;
 
 export default () => {
