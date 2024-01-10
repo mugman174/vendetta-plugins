@@ -4,7 +4,7 @@ function hwinfo() {
   const { cpuCoreCount, cpuPercentage, memory } = findByProps("memory");
   const cpuPerc = cpuPercentage.toFixed(2) + "%";
   const memUsage = parseFloat((memory / 1000).toPrecision(3)) + " MB";
-  const { type, details } = findByProps("useNetInfo").fetch()._55;
+  const { type, details } = Object.values(findByProps("useNetInfo").fetch()).filter(i=>i)[0];
   let netInfo = "";
   if (type == "cellular") {
     netInfo = `Cellular ${details.cellularGeneration?.toUpperCase() || ""}`;
